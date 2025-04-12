@@ -30,7 +30,7 @@ Si usas el archivo ejecutable (`.exe`), no necesitas instalar Python ni las libr
 
 ### 1. Ejecutar como archivo `.exe`
 
-Si no deseas usar el código fuente, simplemente ejecuta el archivo **`Calculadora3D.exe`**.
+Si no deseas usar el código fuente, simplemente ejecuta el archivo **`calculador_3d_GUI.exe`**.
 
 #### ⚠ Instrucciones para evitar bloqueos del antivirus:
 
