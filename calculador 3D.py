@@ -1,8 +1,9 @@
 import sys
 from PyQt5.QtWidgets import (
-    QApplication, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget, QDesktopWidget, QMenuBar, QMenu, QMessageBox
+    QApplication, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget,
+    QDesktopWidget, QMenuBar, QMenu, QMessageBox
 )
-
+from PyQt5.QtGui import QFont
 
 # Función para calcular costos
 def calcular_costo():
@@ -40,24 +41,56 @@ def calcular_costo():
     except ValueError:
         resultado.setText("Por favor, ingresa valores válidos.")
 
-
 # Función para mostrar información del desarrollador
 def mostrar_informacion():
-    """
-    Muestra información de ayuda en un cuadro de diálogo.
-    """
     QMessageBox.information(
         ventana,
         "Acerca del Programa",
         "Calculadora de Impresión 3D\n"
-        "Versión: 1.0\n"
+        "Versión: 1.0.1\n"
         "Desarrollador: Nahum Flores\n"
         "Correo: excalibur_965@hotmail.com\n"
     )
 
-
 # Crear la aplicación
 app = QApplication(sys.argv)
+
+# **Estilo Moderno**
+app.setStyleSheet("""
+    QWidget {
+        background-color: #f7f7f7;
+        font-family: Arial;
+        font-size: 14px;
+    }
+    QLabel {
+        font-weight: bold;
+        color: #333;
+    }
+    QLineEdit {
+        border: 1px solid #bbb;
+        border-radius: 5px;
+        padding: 5px;
+        background-color: #fff;
+    }
+    QPushButton {
+        background-color: #28a745;
+        color: white;
+        border-radius: 5px;
+        padding: 10px;
+    }
+    QPushButton:hover {
+        background-color: #218838;
+    }
+    QMenuBar {
+        background-color: #0078D7;
+        color: white;
+    }
+    QMenu {
+        background-color: #0078D7;
+        color: white;
+    }
+""")
+
 ventana = QWidget()
 ventana.setWindowTitle("Calculadora de Impresión 3D")
 
@@ -69,33 +102,43 @@ menu_bar = QMenuBar(ventana)
 menu_ayuda = QMenu("Ayuda", ventana)
 menu_ayuda.addAction("Acerca del programa", mostrar_informacion)
 menu_bar.addMenu(menu_ayuda)
-
-# Establecer el menú en la ventana
 ventana.layout = QVBoxLayout()  # Diseño principal
 ventana.layout.setMenuBar(menu_bar)  # Añadir menú sin que afecte el contenido
 
 # Crear diseño vertical principal
 layout = QVBoxLayout()
 
-# Agregar campos de entrada
+# **Estilo Moderno de Fuentes**
+font_title = QFont("Arial", 16, QFont.Bold)
+titulo = QLabel("Calculadora de Impresión 3D")
+titulo.setFont(font_title)
+titulo.setStyleSheet("color: #0078D7;")
+layout.addWidget(titulo)
+
+# Agregar campos de entrada con valores predeterminados
 layout.addWidget(QLabel("Precio total del material (MXN):"))
 campo_precio_total = QLineEdit()
+campo_precio_total.setText("300")  # Precio predeterminado
 layout.addWidget(campo_precio_total)
 
 layout.addWidget(QLabel("Peso total del material (gramos):"))
 campo_peso_total = QLineEdit()
+campo_peso_total.setText("1000")  # Peso predeterminado (1 kg)
 layout.addWidget(campo_peso_total)
 
 layout.addWidget(QLabel("Peso usado (gramos):"))
 campo_peso_usado = QLineEdit()
+campo_peso_usado.setText("100")  # Peso usado predeterminado
 layout.addWidget(campo_peso_usado)
 
 layout.addWidget(QLabel("Horas de impresión:"))
 campo_horas = QLineEdit()
+campo_horas.setText("2")  # Horas predeterminadas
 layout.addWidget(campo_horas)
 
 layout.addWidget(QLabel("Minutos de impresión:"))
 campo_minutos = QLineEdit()
+campo_minutos.setText("30")  # Minutos predeterminados
 layout.addWidget(campo_minutos)
 
 layout.addWidget(QLabel("Margen de ganancia (%):"))
@@ -115,6 +158,7 @@ layout.addWidget(boton_calcular)
 
 # Resultado
 resultado = QLabel("")
+resultado.setStyleSheet("font-weight: bold; color: #333; padding: 10px;")
 layout.addWidget(resultado)
 
 # Añadir el diseño principal a la ventana
